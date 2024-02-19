@@ -15,6 +15,14 @@
 				version = decoded['version']
 
 				switch (version) {
+					case 0:
+						message = "Bitcoin P2PKH address:";
+						version = 48;
+						break;
+					case 48:
+						message = "Litecoin P2PKH address:";
+						version = 0;
+						break;
 					case 5:
 						message = "Mainnet p2sh address: ";
 						version = 50;
@@ -34,6 +42,7 @@
 					default:
 						throw "unknown";
 				}
+				// 0 <-> 48
 				// 5 <-> 50
 				// 196 <-> 58
 				address = bitcoin.address.toBase58Check(decoded['hash'], version);
